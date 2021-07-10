@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "github.com/noissefnoc/go-grpc-202107/proto";
+
+package helloworld;
+
+import "validate/validate.proto";
+
+// The greeting service definition.
+service Greeter {
+    // Sends a greeting
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+    string name = 1 [(validate.rules).string = {
+        pattern: "^[A-Za-z]+$",
+        max_bytes: 5,
+    }];
+}
+
+// The response message containing the greetings
+message HelloReply {
+    string message = 1;
+}
